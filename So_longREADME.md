@@ -122,7 +122,7 @@ Fonksiyonlar 4 paramtetreden fazla alamıyor ve so_long gibi bir projede çok ba
 
 t_data *data diyip bi
 
-int main(void) kısmına gelelim;
+int main(void) kısmına gelelim;  to be contuined;;;;;;;;;;;;;;,
 
 
 
