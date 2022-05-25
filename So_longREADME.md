@@ -1,7 +1,8 @@
 --->-> Minilibx <-<---
 Öncelikle kütüphanede bulunan OpenGL ve Appkit kavramlarının ne olduğunu araştıralım;
---->->OpenGL & Appkit<-<---
+Ardından Basit örnek bir kod ile ekrana bir resim bastırıp karakter hareketinin temellerini atalım
 
+--->->OpenGL & Appkit<-<---
 
 ->Cocoa of MacOSX (Appkit)<- : 1980-90 larda Masaüstü işletim sistemi macOS için Apple'ın yerel nesne yönetimli programlama ve uygulama programlama arayüzüdür;
 
@@ -116,29 +117,28 @@ Herhangi bir yerde daha rahat kullanmak üzere adını mv komutu ile mlx olarak 
 sonrasında projemize include larımızı dahil ediyoruz, mlx/malloc/calloc için ekstra kütüphanelerimizi tanımladık;
 ve kodun daha düzenli durması açısından resimlerimizin yolunu define ile en başta tanımladık;
 
-struct yapısını neden kullandım ve içindeki değişkenler nerede kullanılacak ? 
+struct yapısını neden kullandım ? 
 Fonksiyonlar 4 paramtetreden fazla alamıyor ve so_long gibi bir projede çok basit bir işlemde bile bir fonksyiondan diğerine veri taşırken,
 çok fazla veriyi taşımamız gerekebiliyor. bu gibi durumlarda tek tek göndermek yerine bunları bir veri yığını(struct) olarak taşımak işimizi kolaylaştırıyor;
 
-t_data *data diyip bi
+mlx_init() mlx_new_window() mlx_xpm_file_to_image() mlx_put_image_to_window() mlx_hook() mlx_loop() fonksiyonlarından biraz bahsedelim;
 
-int main(void) kısmına gelelim;  to be contuined;;;;;;;;;;;;;;,
+mlx_init() : fonksiyonu çalıştığında ekran kartı ile doğrudan bir bağlantı kurar bu bağlantı sizin ekrana resim çizdirmek için kullandığınız bir bağlantıdır. ve bunu kullanabilmeniz üzere bu fonksiyon size bir void* return eder; size bir void * return eder;
 
+mlx_new_window() : yeni bir pencere oluşturmak için kullanılır. haliyle ekrana resim bastıracaksanız bunun bir container içinde olması gerek, dolayısıyla sizden önce sizin ekran kartına bağlantınız olan void pointerinizi (mlx*) daha sonra ekrandaki pencerenin kaça kaç olacağını (width height) ve pencerenizin adının ne olacağını ister; size bir void * return eder;
 
+mlx_xpm_file_to_image() : xpm halindeki bir resim formatını algılayıp buna hayat verir ve bunu nesneleştirir. sizden bağlantı pointerinizi (mlx*)resminizin adresini(path) ve resmin boyutlarının belirtildiği değişkenlerin adreslerini ister; size bir void * return eder;
 
+mlx_put_image_to_window() : ekrana resimleri basmak için kullanılır. i  lk olarak sizden bağlantı adresinizi (mlx*) ardından  hangi pencerede basacağınızı (mlx_win*) ve resimin pencerede hangi x y konumlarında basılacağını belirtmenizi ister. return değeri int türündedir;
 
+mlx_hook(): sizin belirli aksiyonlarınızı (mouse key events) yakalamanızı sağlar
 
+mlx_loop()
 
+int main(void) kısmına gelelim;      
+t_data *data diyip içini doldurmak üzere bi struct tanımladık;
 
-
-
-
-
-
-
-
-
-
+Mallocla yer ayırdığınızda içindeki değişkenlere herhangi bir değer ataması yapmıyorsunuz ve bu çoğu durumda patlıyor bunun yerine libftdeki kendi yazdığımız ft_calloc'u kullandık (calloc yasaklı);
 
 
 
