@@ -131,17 +131,36 @@ mlx_xpm_file_to_image() : xpm halindeki bir resim formatını algılayıp buna h
 
 mlx_put_image_to_window() : ekrana resimleri basmak için kullanılır. i  lk olarak sizden bağlantı adresinizi (mlx*) ardından  hangi pencerede basacağınızı (mlx_win*) ve resimin pencerede hangi x y konumlarında basılacağını belirtmenizi ister. return değeri int türündedir;
 
-mlx_hook(): sizin belirli aksiyonlarınızı (mouse key events) yakalamanızı sağlar
+mlx_hook(): sizin belirli aksiyonlarınızı (mouse, key, etc.. events) yakalamanızı sağlar. pencerenizi, event türünüzü, bit maskeleme komutunuzu, hook anında hangi fonksiyona gideceğini, bu fonksiyona hangi veriyi göndereceğinizi belirleyerek kullanabilirsiniz. fonksiyonun temel amacı -> x olduğunda y fonksiyonu çalışsındır.
 
-mlx_loop()
+mlx_loop() : EKrandaki pencerenizin sürekli, siz sonlandırana kadar açık kalmasını sağlar. her pencereyi bir işlem parçağı olarak düşünürsek oluşur çalışır ve biter. bunları ekranda görebilmemiz için system kütüphaneleri döngüler ile bu konteynırları açık tutar.
+
+Şimdi adım adım ekranda bir resim bastırıp haraket ettirmenin kodunu inceleyelim;
 
 int main(void) kısmına gelelim;      
 t_data *data diyip içini doldurmak üzere bi struct tanımladık;
 
 Mallocla yer ayırdığınızda içindeki değişkenlere herhangi bir değer ataması yapmıyorsunuz ve bu çoğu durumda patlıyor bunun yerine libftdeki kendi yazdığımız ft_calloc'u kullandık (calloc yasaklı);
 
+bir resim void* da tutulur fakat benim bir resim listem olacağı için void** tanımlayıp buna yer açmam gerekiyor
 
+ardından ekran kartıyla bağ kurup bunu veri yığınımın içine sonradan kullanmak üzere kayetim
 
+sırasıyla resim listeme resim atamalarımı yapıyorum PL_FT player front left right olarak atadım.
 
+ekranda bir pencere oluşturup adını "Pencere :D" koydum
 
+pencere açıldığında default olarak gözükmesi için karakterin ön yüzünü put image ile ekrana bastırdım
 
+ardından programımı Loop fonksiyonuna sokup herhangi bir klavye eventinde key_Event metotuna gitmesi için bekleme moduna aldım.
+
+eğer klavyeden bir tuşa basarsam bu tuşun keycodu alınacak ve key_evente gidecek. diyelimki 'd' tuşuna bastım . keycode == 2 olarak geldi.
+
+if keycode == 2 ise resmin konumunu 64 kadar sağa ötelemem gerek
+bunu da data->position_x değişkenimi 64 arttırarak yapıyorum.
+resmi ekrana tekrar bastırırken bu data->position_x,y konumlarına göre bastırıyorum
+neden 64 ? benim resimlerim 64 pixel. kendi resimlerinize göre bu oran değişebilir.
+
+Evet özünde bu kadar basit.
+
+İyi Çalışmalar :)
