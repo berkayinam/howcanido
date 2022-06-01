@@ -108,6 +108,8 @@ struct timeval kullanan işlevler gettimeofday() ve settimeofday() işlevredir. 
 fonksiyonlar başarılı çalışırsa 0 döndürür aksi taktirde -1; 
 gettimeofday(),settimeofday(): şu andaki zamanı ekrana basmak için ve saat & zaman dilimini ayarlamak için kullanılır;
 
+
+-->Örnek<--
 Mutex yapısına göre 2 araç kapasiteli 1 boş oroparkımız olsun (ready_to_run);
 bu otoparkta da 1 drift pisti olsun(running);
 araçların görevi toplamda 10 tur drift atıp otoparktan çıkmak (finish);
